@@ -11,20 +11,35 @@ function Clock() {
     return () => clearInterval(timer);
   }, []);
 
-  // Format time to IST (Indian Standard Time)
-  const formatTime = (date) => {
-    return new Intl.DateTimeFormat('en-IN', {
+  // Format to IST (Indian Standard Time)
+  const formatDateTime = (date) => {
+    const timeOptions = {
       timeZone: 'Asia/Kolkata',
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
       hour12: true
-    }).format(date);
+    };
+    
+    const dateOptions = {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit',
+      month: 'short',
+    };
+
+    const timeString = new Intl.DateTimeFormat('en-IN', timeOptions).format(date).toUpperCase();
+    const dateString = new Intl.DateTimeFormat('en-IN', dateOptions).format(date);
+    
+    return { dateString, timeString };
   };
+
+  const { dateString, timeString } = formatDateTime(time);
 
   return (
     <div className="ist-clock">
-      <span className="clock-time">{formatTime(time)}</span>
+      <span className="clock-date">{dateString}</span>
+      <span className="clock-divider">|</span>
+      <span className="clock-time">{timeString}</span>
       <span className="clock-label">IST</span>
     </div>
   );

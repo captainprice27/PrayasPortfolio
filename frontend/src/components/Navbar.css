@@ -114,6 +114,16 @@
     white-space: nowrap;
 }
 
+.clock-date {
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    opacity: 0.8;
+}
+
+.clock-divider {
+    opacity: 0.3;
+}
+
 .clock-label {
     font-size: var(--text-xs);
     font-weight: var(--font-bold);

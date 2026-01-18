@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Clock from './Clock';
 import AnalyticsModal from './AnalyticsModal';
 import ThemeToggle from './ThemeToggle';
+import { usePortfolio } from '../context/PortfolioContext';
 import './Navbar.css';
 
 // Navigation links configuration
@@ -20,13 +21,19 @@ const NAV_LINKS = [
   { id: 'skills', label: 'Skills' },
   { id: 'journey', label: 'Journey' },
   { id: 'projects', label: 'Projects' },
+  { id: 'coding-profiles', label: 'Profiles' },
   { id: 'contact', label: 'Contact' },
 ];
 
 function Navbar() {
+  const { data } = usePortfolio();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false);
+
+  // Derived name data
+  const name = data?.personal?.FULL_NAME || "Prayas Mazumder";
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
 
   // Handle scroll effect for navbar background & Record Visit
   useEffect(() => {
@@ -38,10 +45,8 @@ function Navbar() {
     // Record visit on mount
     const recordVisit = async () => {
         try {
-            // Simple platform detection
             const platform = navigator.platform;
-            
-            await fetch('http://localhost:5000/api/analytics/visit', {
+            await fetch('/api/analytics/visit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ platform })
@@ -50,7 +55,7 @@ function Navbar() {
             console.error("Failed to record visit", e);
         }
     };
-    // Check if we already recorded this session to avoid duplicates on re-renders (optional but good)
+    
     if (!sessionStorage.getItem('visitRecorded')) {
         recordVisit();
         sessionStorage.setItem('visitRecorded', 'true');
@@ -84,8 +89,8 @@ function Navbar() {
           onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}
           whileHover={{ scale: 1.05 }}
         >
-          <span className="logo-text">PM</span>
-          <span className="logo-full">Prayas Mazumder</span>
+          <span className="logo-text">{initials}</span>
+          <span className="logo-full">{name}</span>
         </motion.a>
 
         {/* Desktop Navigation */}
@@ -172,6 +177,5 @@ function Navbar() {
     </>
   );
 }
-
 
 export default Navbar;

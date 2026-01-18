@@ -8,42 +8,62 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiMapPin, FiBriefcase, FiBook } from 'react-icons/fi';
+import { usePortfolio } from '../context/PortfolioContext';
 import './About.css';
 
-// =====================================================
-// CONFIGURATION - Replace with your actual information
-// =====================================================
-const ABOUT_CONFIG = {
-  // Replace with your actual profile photo path
-  PROFILE_IMAGE_URL: "/assets/images/profile-photo.jpg",
-  
-  // About description paragraphs - customize these
-  ABOUT_PARAGRAPHS: [
-    `I'm a passionate Software Developer with a strong foundation in Computer Science. 
-    As a B.Tech graduate from IIEST, Shibpur, I've developed expertise in building 
-    scalable applications using modern technologies.`,
-    
-    `Currently working as an Analyst-Developer at WTW, I contribute to enterprise-level 
-    solutions while continuously learning and growing. I believe in writing clean, 
-    maintainable code and creating intuitive user experiences.`,
-    
-    `When I'm not coding, you can find me exploring new technologies, contributing to 
-    open-source projects, or sharing knowledge with the developer community.`
-  ],
-  
-  // Quick facts about you
-  QUICK_FACTS: [
-    { icon: FiMapPin, label: "Location", value: "India" },
-    { icon: FiBriefcase, label: "Experience", value: "Analyst-Developer @ WTW" },
-    { icon: FiBook, label: "Education", value: "B.Tech CST, IIEST Shibpur" },
-  ]
-};
-
 function About() {
+  const { data } = usePortfolio();
+  
   const [ref, inView] = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
+
+  // Data mapping with fallbacks
+  const personal = data?.personal || {
+    FULL_NAME: "Prayas Mazumder",
+    ABOUT_DESCRIPTION: `I'm a passionate Software Developer with a strong foundation in Computer Science. 
+    As a B.Tech graduate from IIEST, Shibpur, I've developed expertise in building 
+    scalable applications using modern technologies. Currently working as an Analyst-Developer at WTW.`,
+    PROFILE_IMAGE_PATH: "/assets/images/profile-photo.svg"
+  };
+
+  const contact = data?.contact || {
+    LOCATION: "India"
+  };
+
+  // Convert description string to array if needed
+  const paragraphs = personal.ABOUT_DESCRIPTION 
+    ? [personal.ABOUT_DESCRIPTION] 
+    : [
+        `I'm a passionate Software Developer with a strong foundation in Computer Science. 
+        As a B.Tech graduate from IIEST, Shibpur, I've developed expertise in building 
+        scalable applications using modern technologies.`,
+        `Currently working as an Analyst-Developer at WTW, I contribute to enterprise-level 
+        solutions while continuously learning and growing.`
+      ];
+
+  const quickFacts = [
+    { 
+      icon: FiMapPin, 
+      label: "Location", 
+      value: contact.LOCATION 
+    },
+    { 
+      icon: FiBriefcase, 
+      label: "Experience", 
+      value: data?.journey?.find(j => j.type === 'work')?.title 
+        ? `${data.journey.find(j => j.type === 'work').title} @ ${data.journey.find(j => j.type === 'work').INSTITUTION_NAME}` 
+        : "Analyst-Developer @ WTW" 
+    },
+    { 
+      icon: FiBook, 
+      label: "Education", 
+      value: data?.journey?.find(j => j.type === 'education')?.INSTITUTION_NAME 
+        ? `${data.journey.find(j => j.type === 'education').title}, ${data.journey.find(j => j.type === 'education').INSTITUTION_NAME}` 
+        : "B.Tech CST, IIEST Shibpur" 
+    },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -90,12 +110,10 @@ function About() {
                 
                 {/* Profile Image */}
                 <div className="about-image">
-                  {/* IMPORTANT: Replace this with your actual profile photo */}
                   <img 
-                    src={ABOUT_CONFIG.PROFILE_IMAGE_URL} 
-                    alt="Prayas Mazumder - Software Developer"
+                    src={personal.PROFILE_IMAGE_PATH} 
+                    alt={personal.FULL_NAME}
                     onError={(e) => {
-                      // Fallback if image doesn't load
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
@@ -110,7 +128,7 @@ function About() {
 
             {/* Text Content Side */}
             <motion.div className="about-text" variants={itemVariants}>
-              {ABOUT_CONFIG.ABOUT_PARAGRAPHS.map((paragraph, index) => (
+              {paragraphs.map((paragraph, index) => (
                 <p key={index} className="about-paragraph">
                   {paragraph}
                 </p>
@@ -118,7 +136,7 @@ function About() {
 
               {/* Quick Facts */}
               <div className="about-facts">
-                {ABOUT_CONFIG.QUICK_FACTS.map((fact, index) => (
+                {quickFacts.map((fact, index) => (
                   <motion.div 
                     key={index} 
                     className="fact-card"

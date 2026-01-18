@@ -13,41 +13,36 @@ import {
   FiGithub, FiLinkedin, FiTwitter, FiSend,
   FiCheckCircle, FiAlertCircle
 } from 'react-icons/fi';
+import { usePortfolio } from '../context/PortfolioContext';
 import './Contact.css';
 
-// =====================================================
-// CONTACT CONFIGURATION
-// Update with your actual contact information
-// =====================================================
-const CONTACT_INFO = {
-  // REPLACE: Your email address
-  EMAIL: "your.email@example.com",
-  // REPLACE: Your phone (optional, set to null to hide)
-  PHONE: "+91-XXXXXXXXXX",
-  // REPLACE: Your location
-  LOCATION: "India",
-  
-  // Social Links - Replace with your actual URLs
-  SOCIAL_LINKS: [
-    { 
-      name: "GitHub", 
-      icon: FiGithub, 
-      URL: "https://github.com/YOUR_USERNAME" 
-    },
-    { 
-      name: "LinkedIn", 
-      icon: FiLinkedin, 
-      URL: "https://linkedin.com/in/YOUR_USERNAME" 
-    },
-    { 
-      name: "Twitter", 
-      icon: FiTwitter, 
-      URL: "https://twitter.com/YOUR_HANDLE" 
-    },
-  ],
-};
-
 function Contact() {
+  const { data } = usePortfolio();
+  
+  // Map backend contact data
+  const contactInfo = {
+    EMAIL: data?.contact?.EMAIL_ADDRESS || "your.email@example.com",
+    PHONE: data?.contact?.PHONE_NUMBER || "+91-XXXXXXXXXX",
+    LOCATION: data?.contact?.LOCATION || "India",
+    SOCIAL_LINKS: [
+      { 
+        name: "GitHub", 
+        icon: FiGithub, 
+        URL: data?.contact?.GITHUB_URL || "https://github.com/" 
+      },
+      { 
+        name: "LinkedIn", 
+        icon: FiLinkedin, 
+        URL: data?.contact?.LINKEDIN_URL || "https://linkedin.com/in/" 
+      },
+      { 
+        name: "Twitter", 
+        icon: FiTwitter, 
+        URL: data?.contact?.TWITTER_URL || "https://twitter.com/" 
+      },
+    ],
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -77,18 +72,29 @@ function Contact() {
     // - Your own backend API
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      setStatus({
-        type: 'success',
-        message: 'Message sent successfully! I\'ll get back to you soon.',
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus({
+          type: 'success',
+          message: data.message || 'Message sent successfully! I\'ll get back to you soon.',
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error(data.error || 'Failed to send message');
+      }
     } catch (error) {
       setStatus({
         type: 'error',
-        message: 'Something went wrong. Please try again or email me directly.',
+        message: error.message || 'Something went wrong. Please try again or email me directly.',
       });
     }
     
@@ -135,21 +141,21 @@ function Contact() {
                 </div>
                 <div className="detail-content">
                   <span className="detail-label">Email</span>
-                  <a href={`mailto:${CONTACT_INFO.EMAIL}`} className="detail-value">
-                    {CONTACT_INFO.EMAIL}
+                  <a href={`mailto:${contactInfo.EMAIL}`} className="detail-value">
+                    {contactInfo.EMAIL}
                   </a>
                 </div>
               </div>
 
-              {CONTACT_INFO.PHONE && (
+              {contactInfo.PHONE && (
                 <div className="contact-detail-item">
                   <div className="detail-icon">
                     <FiPhone />
                   </div>
                   <div className="detail-content">
                     <span className="detail-label">Phone</span>
-                    <a href={`tel:${CONTACT_INFO.PHONE}`} className="detail-value">
-                      {CONTACT_INFO.PHONE}
+                    <a href={`tel:${contactInfo.PHONE}`} className="detail-value">
+                      {contactInfo.PHONE}
                     </a>
                   </div>
                 </div>
@@ -161,7 +167,7 @@ function Contact() {
                 </div>
                 <div className="detail-content">
                   <span className="detail-label">Location</span>
-                  <span className="detail-value">{CONTACT_INFO.LOCATION}</span>
+                  <span className="detail-value">{contactInfo.LOCATION}</span>
                 </div>
               </div>
             </div>
@@ -170,7 +176,7 @@ function Contact() {
             <div className="contact-socials">
               <span className="socials-label">Follow Me</span>
               <div className="socials-icons">
-                {CONTACT_INFO.SOCIAL_LINKS.map((social) => (
+                {contactInfo.SOCIAL_LINKS.map((social) => (
                   <a
                     key={social.name}
                     href={social.URL}

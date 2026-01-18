@@ -9,31 +9,38 @@
 }
 
 .skills-grid {
-    display: grid;
-    /* Change to single column layout as requested ("below then below") */
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-6);
-    max-width: 900px;
-    /* Constrain width for better readability */
+    max-width: 1000px;
+    /* Wider max-width for horizontal cards */
     margin: 0 auto;
 }
 
-/* Skill Category Card */
-.skill-category {
-    padding: var(--space-8);
-    /* Increased padding for wider look */
+/* Skill Group Card - Horizontal Layout */
+.skill-group {
+    padding: var(--space-6) var(--space-8);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* Align header and bubbles vertically */
+    gap: var(--space-8);
 }
 
-.category-header {
+.skill-group-header {
     display: flex;
     align-items: center;
     gap: var(--space-4);
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--border-color);
+    /* Remove bottom border and margin since it's side-by-side now */
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    min-width: 250px;
+    /* Fixed width for header to align bubbles nicely */
+    flex-shrink: 0;
 }
 
-.category-icon {
+.skill-group-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,50 +53,66 @@
     flex-shrink: 0;
 }
 
-.category-title {
+.skill-group-title {
     font-family: var(--font-display);
     font-size: var(--text-xl);
     font-weight: var(--font-bold);
     color: var(--text-primary);
+    text-transform: capitalize;
 }
 
-/* Bubbles Container */
-.category-skills-bubbles {
+/* Skills Bubble Container */
+.skills-bubbles {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+    flex-grow: 1;
+    /* Take remaining space */
 }
 
-/* Skill Bubble Style */
+/* Individual Skill Bubble */
 .skill-bubble {
     padding: var(--space-2) var(--space-4);
     background: var(--bg-tertiary);
     color: var(--text-primary);
-    border: 1px solid var(--border-color);
+
+    /* UPDATED: Border using theme accent color */
+    border: 1px solid var(--accent-primary);
+
     border-radius: var(--radius-full);
-    /* Pill shape */
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
     cursor: default;
     transition: all var(--transition-base);
     box-shadow: var(--shadow-sm);
+    white-space: nowrap;
 }
 
 /* Hover effect */
 .skill-bubble:hover {
+    background: var(--accent-primary);
+    /* Fill with accent on hover */
+    color: var(--text-inverse);
+    /* Text becomes white/black */
     border-color: var(--accent-primary);
-    background: var(--bg-secondary);
-    color: var(--accent-primary);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
 }
 
 /* Responsive */
-@media (max-width: 640px) {
-    .skill-category {
+@media (max-width: 768px) {
+    .skill-group {
+        flex-direction: column;
+        /* Stack vertically on small screens */
+        align-items: flex-start;
+        gap: var(--space-4);
         padding: var(--space-5);
     }
 
-    .category-skills-bubbles {
-        gap: var(--space-2);
+    .skill-group-header {
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: var(--space-4);
+        width: 100%;
+        margin-bottom: var(--space-2);
     }
 }
