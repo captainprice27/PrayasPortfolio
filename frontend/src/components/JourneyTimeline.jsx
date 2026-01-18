@@ -8,55 +8,17 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiBookOpen, FiAward, FiBriefcase, FiMapPin } from 'react-icons/fi';
+import { FiBookOpen, FiAward, FiBriefcase, FiMapPin, FiTerminal } from 'react-icons/fi';
+import { usePortfolio } from '../context/PortfolioContext';
 import './JourneyTimeline.css';
 
-// =====================================================
-// JOURNEY DATA CONFIGURATION
-// Update with your actual journey milestones
-// =====================================================
-const JOURNEY_MILESTONES = [
-  {
-    id: 1,
-    type: "education",
-    // REPLACE: Your school name
-    INSTITUTION_NAME: "Your School Name",
-    // REPLACE: Path to school logo in /public/assets/logos/
-    INSTITUTION_LOGO: "/assets/logos/school-logo.png",
-    title: "Secondary & Higher Secondary",
-    YEAR_RANGE: "2012 - 2020",
-    // REPLACE: Your actual HS marks
-    ACHIEVEMENT: "HS Score: XX.XX%",
-    description: "Completed schooling with Science stream (PCM)",
-    icon: FiBookOpen,
-    color: "var(--accent-primary)", // Red/Blue based on theme
-  },
-  {
-    id: 2,
-    type: "education",
-    INSTITUTION_NAME: "IIEST, Shibpur",
-    INSTITUTION_LOGO: "/assets/logos/iiest-logo.png",
-    title: "B.Tech in Computer Science & Technology",
-    YEAR_RANGE: "2021 - 2025",
-    // REPLACE: Your CGPA
-    ACHIEVEMENT: "CGPA: X.XX",
-    description: "Premier engineering institution, one of India's oldest technical institutes",
-    icon: FiAward,
-    color: "var(--accent-secondary)", // Green/Yellow based on theme
-  },
-  {
-    id: 3,
-    type: "work",
-    INSTITUTION_NAME: "WTW (Willis Towers Watson)",
-    INSTITUTION_LOGO: "/assets/logos/wtw-logo.png",
-    title: "Analyst-Developer",
-    YEAR_RANGE: "June 2025 - Present",
-    ACHIEVEMENT: "Full-time Position",
-    description: "Working on enterprise solutions and large-scale software development",
-    icon: FiBriefcase,
-    color: "var(--accent-primary)",
-  },
-];
+// Map icon strings from backend to React Icons
+const iconMap = {
+  school: FiBookOpen,
+  university: FiAward,
+  briefcase: FiBriefcase,
+  terminal: FiTerminal,
+};
 
 // Individual Milestone Card Component
 function MilestoneCard({ milestone, index, isLast }) {
@@ -65,7 +27,7 @@ function MilestoneCard({ milestone, index, isLast }) {
     triggerOnce: true,
   });
 
-  const Icon = milestone.icon;
+  const Icon = milestone.iconComponent || FiAward;
   const isEven = index % 2 === 0;
 
   return (
@@ -170,10 +132,36 @@ function MilestoneCard({ milestone, index, isLast }) {
 }
 
 function JourneyTimeline() {
+  const { data } = usePortfolio();
   const [headerRef, headerInView] = useInView({
     threshold: 0.5,
     triggerOnce: true,
   });
+
+  // Map backend journey data to frontend format
+  const milestones = (data?.journey || []).map((m, index) => ({
+    ...m,
+    YEAR_RANGE: m.YEAR_RANGE || `${m.YEAR_START}${m.YEAR_END ? ` - ${m.YEAR_END}` : ''}`,
+    ACHIEVEMENT: m.ACHIEVEMENT || m.ACHIEVEMENT_DETAILS,
+    iconComponent: iconMap[m.icon] || FiAward,
+    color: m.type === 'work' ? 'var(--accent-primary)' : 'var(--accent-secondary)'
+  }));
+
+  // Fallback if no data
+  const displayMilestones = milestones.length > 0 ? milestones : [
+    {
+      id: 1,
+      type: "education",
+      INSTITUTION_NAME: "Ramakrishna Mission Vidyabhaban",
+      INSTITUTION_LOGO: "/assets/logos/school-logo.svg",
+      title: "Secondary & Higher Secondary",
+      YEAR_RANGE: "2012 - 2020",
+      ACHIEVEMENT: "HS Score: 95.60%",
+      description: "Completed schooling with focus on Science stream",
+      iconComponent: FiBookOpen,
+      color: "var(--accent-primary)",
+    }
+  ];
 
   return (
     <section id="journey" className="journey section">
@@ -236,12 +224,12 @@ function JourneyTimeline() {
 
           {/* Milestone Cards */}
           <div className="milestones-wrapper">
-            {[...JOURNEY_MILESTONES].reverse().map((milestone, index) => (
+            {[...displayMilestones].reverse().map((milestone, index) => (
               <MilestoneCard
                 key={milestone.id}
                 milestone={milestone}
                 index={index}
-                isLast={index === JOURNEY_MILESTONES.length - 1}
+                isLast={index === displayMilestones.length - 1}
               />
             ))}
           </div>

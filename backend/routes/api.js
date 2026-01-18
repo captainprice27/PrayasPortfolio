@@ -10,6 +10,7 @@ const router = express.Router();
 const portfolioData = require('../data/portfolioData');
 const geoip = require('geoip-lite');
 const Visitor = require('../models/Visitor');
+const Message = require('../models/Message');
 
 // In-memory fallback for without MongoDB
 let localVisitors = [];
@@ -176,7 +177,9 @@ router.post('/analytics/visit', async (req, res) => {
         const geo = geoip.lookup(ip) || {};
 
         let location = 'Unknown';
-        if (geo.city && geo.country) {
+        if (ip === '::1' || ip === '127.0.0.1' || ip.includes('::ffff:127.0.0.1')) {
+            location = 'Localhost (Testing)';
+        } else if (geo.city && geo.country) {
             location = `${geo.city}, ${geo.country}`;
         } else if (geo.country) {
             location = geo.country;
@@ -211,6 +214,58 @@ router.post('/analytics/visit', async (req, res) => {
         res.status(500).json({
             success: false,
             error: 'Server Error: Unable to record visit',
+        });
+    }
+});
+
+/**
+ * @route   POST /api/contact
+ * @desc    Submit contact form message
+ * @access  Public
+ */
+router.post('/contact', async (req, res) => {
+    try {
+        const { name, email, subject, message } = req.body;
+
+        // Basic validation
+        if (!name || !email || !subject || !message) {
+            return res.status(400).json({
+                success: false,
+                error: 'Please provide all required fields'
+            });
+        }
+
+        const newMessage = {
+            name,
+            email,
+            subject,
+            message,
+            timestamp: new Date()
+        };
+
+        // Try saving to MongoDB
+        try {
+            await Message.create(newMessage);
+        } catch (dbError) {
+            // If DB is offline, we log it. 
+            // In a more robust system, we might use local storage or email fallback
+            console.error('Database Error while saving message:', dbError);
+            return res.status(503).json({
+                success: false,
+                error: 'Database unavailable. Please try again later or email directly.'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Your message has been received! I will get back to you soon.'
+        });
+
+    } catch (error) {
+        console.error('Contact Form Error:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Server Error: Unable to process your message',
         });
     }
 });

@@ -8,73 +8,8 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiGithub, FiExternalLink, FiFolder } from 'react-icons/fi';
+import { usePortfolio } from '../context/PortfolioContext';
 import './Projects.css';
-
-// =====================================================
-// PROJECTS CONFIGURATION
-// Update with your actual project information
-// Large cards - only 2 per row for detailed view
-// =====================================================
-const PROJECTS_DATA = [
-  {
-    id: 1,
-    // REPLACE: Your project title
-    PROJECT_TITLE: "Project One Title",
-    // REPLACE: Detailed description of your project
-    PROJECT_DESCRIPTION: `A comprehensive description of your first project. Explain what problem 
-    it solves, the key features, and what you learned building it. This card is large so you 
-    can include meaningful details about your work.`,
-    // REPLACE: Path to project screenshot in /public/assets/projects/
-    PROJECT_IMAGE: "/assets/projects/project-1.png",
-    // REPLACE: Technologies used
-    TECHNOLOGIES: ["React", "Node.js", "MongoDB", "Express"],
-    // REPLACE: Your GitHub repo URL
-    GITHUB_URL: "https://github.com/YOUR_USERNAME/project-1",
-    // REPLACE: Live demo URL (or null if none)
-    DEMO_URL: "https://your-project-1-demo.com",
-    PROJECT_YEAR: "2024",
-    isFeatured: true,
-  },
-  {
-    id: 2,
-    PROJECT_TITLE: "Project Two Title",
-    PROJECT_DESCRIPTION: `Description of your second project. What challenges did you overcome? 
-    What was the impact or result? Include enough detail for recruiters to understand 
-    the scope and complexity of your work.`,
-    PROJECT_IMAGE: "/assets/projects/project-2.png",
-    TECHNOLOGIES: ["Python", "Django", "PostgreSQL", "Docker"],
-    GITHUB_URL: "https://github.com/YOUR_USERNAME/project-2",
-    DEMO_URL: "https://your-project-2-demo.com",
-    PROJECT_YEAR: "2024",
-    isFeatured: true,
-  },
-  {
-    id: 3,
-    PROJECT_TITLE: "Project Three Title",
-    PROJECT_DESCRIPTION: `Description of your third project. Highlight the unique aspects 
-    of this project and what you learned while building it. What makes this project stand 
-    out from your other work?`,
-    PROJECT_IMAGE: "/assets/projects/project-3.png",
-    TECHNOLOGIES: ["Next.js", "TypeScript", "Tailwind", "Prisma"],
-    GITHUB_URL: "https://github.com/YOUR_USERNAME/project-3",
-    DEMO_URL: "https://your-project-3-demo.com",
-    PROJECT_YEAR: "2023",
-    isFeatured: true,
-  },
-  {
-    id: 4,
-    PROJECT_TITLE: "Project Four Title",
-    PROJECT_DESCRIPTION: `Description of your fourth project. This could be a personal project, 
-    hackathon submission, or academic project that showcases specific skills you want 
-    to highlight to potential employers.`,
-    PROJECT_IMAGE: "/assets/projects/project-4.png",
-    TECHNOLOGIES: ["React Native", "Firebase", "Redux"],
-    GITHUB_URL: "https://github.com/YOUR_USERNAME/project-4",
-    DEMO_URL: "https://www.example.com", // Live Demo Link
-    PROJECT_YEAR: "2023",
-    isFeatured: false,
-  },
-];
 
 // Individual Project Card Component
 function ProjectCard({ project, index }) {
@@ -116,7 +51,7 @@ function ProjectCard({ project, index }) {
         {/* Overlay with links on hover */}
         <div className="project-overlay">
           <a 
-            href={project.GITHUB_URL}
+            href={project.GITHUB_REPO_URL || project.GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="overlay-link"
@@ -125,9 +60,9 @@ function ProjectCard({ project, index }) {
             <FiGithub />
             <span>GitHub</span>
           </a>
-          {project.DEMO_URL && (
+          {(project.LIVE_DEMO_URL || project.DEMO_URL) && (
             <a 
-              href={project.DEMO_URL}
+              href={project.LIVE_DEMO_URL || project.DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="overlay-link"
@@ -151,7 +86,7 @@ function ProjectCard({ project, index }) {
         
         {/* Technologies */}
         <div className="project-tech-stack">
-          {project.TECHNOLOGIES.map((tech, i) => (
+          {(project.TECHNOLOGIES_USED || project.TECHNOLOGIES || []).map((tech, i) => (
             <span key={i} className="tech-tag">{tech}</span>
           ))}
         </div>
@@ -159,7 +94,7 @@ function ProjectCard({ project, index }) {
         {/* Action Links */}
         <div className="project-links">
           <a 
-            href={project.GITHUB_URL}
+            href={project.GITHUB_REPO_URL || project.GITHUB_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="project-link"
@@ -167,9 +102,9 @@ function ProjectCard({ project, index }) {
             <FiGithub />
             View Code
           </a>
-          {project.DEMO_URL && (
+          {(project.LIVE_DEMO_URL || project.DEMO_URL) && (
             <a 
-              href={project.DEMO_URL}
+              href={project.LIVE_DEMO_URL || project.DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="project-link primary"
@@ -185,10 +120,27 @@ function ProjectCard({ project, index }) {
 }
 
 function Projects() {
+  const { data } = usePortfolio();
   const [headerRef, headerInView] = useInView({
     threshold: 0.5,
     triggerOnce: true,
   });
+
+  const projects = data?.projects || [];
+
+  // Fallback if no projects loaded
+  const displayProjects = projects.length > 0 ? projects : [
+    {
+      id: 1,
+      PROJECT_TITLE: "Portfolio Project",
+      PROJECT_DESCRIPTION: "Full-stack personal portfolio with React, Node.js, and MongoDB.",
+      PROJECT_IMAGE: "/assets/projects/project-1.svg",
+      TECHNOLOGIES_USED: ["React", "Express", "MongoDB"],
+      GITHUB_REPO_URL: "#",
+      LIVE_DEMO_URL: "#",
+      PROJECT_YEAR: "2024"
+    }
+  ];
 
   return (
     <section id="projects" className="projects section">
@@ -207,7 +159,7 @@ function Projects() {
 
         {/* Projects Grid - 2 columns for large cards */}
         <div className="projects-grid">
-          {PROJECTS_DATA.map((project, index) => (
+          {displayProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}

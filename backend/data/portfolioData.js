@@ -30,14 +30,15 @@ const portfolioData = {
     // Replace # with your actual URLs
     // =====================================================
     contact: {
-        EMAIL_ADDRESS: "your.email@example.com",
+        EMAIL_ADDRESS: "mazumder.prayas@gmail.com",
         PHONE_NUMBER: "+91-XXXXXXXXXX",
-        LOCATION: "India",
+        LOCATION: "Kolkata,India",
 
         // Social Media Links - Replace # with actual URLs
-        GITHUB_URL: "https://github.com/YOUR_GITHUB_USERNAME",
-        LINKEDIN_URL: "https://linkedin.com/in/YOUR_LINKEDIN_USERNAME",
-        TWITTER_URL: "https://twitter.com/YOUR_TWITTER_HANDLE",
+        GITHUB_URL: "https://github.com/captainprice27",
+        LINKEDIN_URL: "https://linkedin.com/in/prayas-mazumder",
+        TWITTER_URL: "https://twitter.com/captainprice_27",
+        INSTAGRAM_URL: "https://instagram.com/captainprice_27",
         PORTFOLIO_URL: "#", // Your deployed portfolio URL
     },
 
@@ -47,28 +48,37 @@ const portfolioData = {
     // =====================================================
     skills: [
         // Programming Languages
-        { name: "JavaScript", category: "language", proficiency: 90 },
-        { name: "TypeScript", category: "language", proficiency: 80 },
-        { name: "Python", category: "language", proficiency: 85 },
-        { name: "Java", category: "language", proficiency: 75 },
-        { name: "C++", category: "language", proficiency: 70 },
+        { name: "C#", category: "language" },
+        { name: "C++", category: "language" },
+        { name: "Python", category: "language" },
+        { name: "JavaScript", category: "language" },
+        { name: "TypeScript", category: "language" },
+
+
+
 
         // Frontend Technologies
-        { name: "React.js", category: "frontend", proficiency: 90 },
-        { name: "Next.js", category: "frontend", proficiency: 80 },
-        { name: "HTML5/CSS3", category: "frontend", proficiency: 95 },
-        { name: "Tailwind CSS", category: "frontend", proficiency: 85 },
+        { name: "React.js", category: "frontend" },
+        { name: "Next.js", category: "frontend" },
+        { name: "HTML5", category: "frontend" },
+        { name: "Tailwind CSS", category: "frontend" },
+        { name: "Bootstrap", category: "frontend" },
 
         // Backend Technologies
-        { name: "Node.js", category: "backend", proficiency: 88 },
-        { name: "Express.js", category: "backend", proficiency: 85 },
-        { name: "MongoDB", category: "backend", proficiency: 80 },
-        { name: "PostgreSQL", category: "backend", proficiency: 75 },
+        { name: "Node.js", category: "backend" },
+        { name: "Express.js", category: "backend" },
+        { name: "ASP.NET Core", category: "backend" },
+        { name: "MySQL", category: "backend" },
+        { name: "SQL Server", category: "backend" },
+        { name: "MongoDB", category: "backend" },
+        // { name: "PostgreSQL", category: "backend" },
 
         // Tools & Others
-        { name: "Git & GitHub", category: "tools", proficiency: 90 },
-        { name: "Docker", category: "tools", proficiency: 70 },
-        { name: "AWS", category: "tools", proficiency: 65 },
+        { name: "Git & GitHub", category: "tools" },
+        { name: "Docker", category: "tools" },
+        { name: "Kubernetes", category: "tools" },
+        { name: "Azure", category: "tools" },
+        { name: "AWS", category: "tools" },
     ],
 
     // =====================================================
@@ -79,39 +89,64 @@ const portfolioData = {
         {
             id: 1,
             type: "education",
-            INSTITUTION_NAME: "Your School Name", // Replace with your school name
-            INSTITUTION_LOGO: "/assets/logos/school-logo.png", // Replace in assets
+            INSTITUTION_NAME: "Ramakrishna Mission Vidyabhaban (H.S.), Midnapore", // Replace with your school name
+            INSTITUTION_LOGO: "/assets/logos/school-logo.svg", // Replace in assets
             title: "Secondary & Higher Secondary",
             YEAR_START: "2012",
             YEAR_END: "2020",
             // HS_MARKS: Your Higher Secondary percentage/CGPA
-            ACHIEVEMENT_DETAILS: "Higher Secondary Score: XX.XX%", // Replace XX.XX with actual marks
+            ACHIEVEMENT_DETAILS: "12th Boards: 95.60%", // Replace XX.XX with actual marks
             description: "Completed schooling with focus on Science stream (Physics, Chemistry, Mathematics)",
             icon: "school",
         },
         {
             id: 2,
             type: "education",
-            INSTITUTION_NAME: "IIEST, Shibpur",
-            INSTITUTION_LOGO: "/assets/logos/iiest-logo.png", // Replace with actual logo
+            INSTITUTION_NAME: "Indian Institute of Engineering Science and Technology (IIEST), Shibpur",
+            INSTITUTION_LOGO: "/assets/logos/iiest-logo.svg", // Replace with actual logo
             title: "B.Tech in Computer Science and Technology",
             YEAR_START: "2021",
             YEAR_END: "2025",
-            ACHIEVEMENT_DETAILS: "CGPA: X.XX", // Replace X.XX with your CGPA
-            description: "Pursuing Bachelor of Technology in Computer Science from one of India's premier engineering institutions",
+            ACHIEVEMENT_DETAILS: "CGPA: 8.8", // Replace X.XX with your CGPA
+            description: "Graduated in B.tech(Computer Science and Technology) from one of India's second oldest engineering college",
             icon: "university",
         },
         {
             id: 3,
             type: "work",
             INSTITUTION_NAME: "WTW (Willis Towers Watson)",
-            INSTITUTION_LOGO: "/assets/logos/wtw-logo.png", // Replace with WTW logo
-            title: "Analyst-Developer",
+            INSTITUTION_LOGO: "/assets/logos/wtw-logo.svg", // Replace with WTW logo
+            title: "Analyst-Software Developer",
             YEAR_START: "June 2025",
             YEAR_END: "Present",
             ACHIEVEMENT_DETAILS: "Full-time Position",
-            description: "Working on enterprise solutions and contributing to large-scale software development projects",
+            description: "Working on enterprise solutions and contributing to financial projects",
             icon: "briefcase",
+        },
+    ],
+
+    // =====================================================
+    // CODING PROFILES
+    // Your competitive programming achievements
+    // =====================================================
+    codingProfiles: [
+        {
+            name: "LeetCode",
+            logo: "/assets/logos/leetcode-logo.svg",
+            profileLink: "https://leetcode.com/captainprice27/",
+            description: "Solved 1000+ problems. Max Rating: 2024. Active daily problem solver.Got prestigious 'Knight' badge",
+        },
+        {
+            name: "CodeChef",
+            logo: "/assets/logos/codechef-logo.svg",
+            profileLink: "https://www.codechef.com/users/captainprice27",
+            description: "3-Star Rated Coder. Highest Rating: 1789. Ranked in top 6000 globally.",
+        },
+        {
+            name: "Codeforces",
+            logo: "/assets/logos/codeforces-logo.svg",
+            profileLink: "https://codeforces.com/profile/icecream27",
+            description: "Pupil (Max Rating: 1395). Active problem solver in Div 2 and Div 3 contests.",
         },
     ],
 
@@ -162,7 +197,7 @@ const portfolioData = {
             PROJECT_TITLE: "Project Four Title",
             PROJECT_DESCRIPTION: `Description of your fourth project. This could be a personal project, 
       hackathon submission, or academic project that showcases your skills.`,
-            PROJECT_IMAGE: "/assets/projects/project-4.png",
+            PROJECT_IMAGE: "/assets/projects/project-4.svg",
             TECHNOLOGIES_USED: ["React Native", "Firebase", "Redux"],
             GITHUB_REPO_URL: "https://github.com/YOUR_USERNAME/project-4",
             LIVE_DEMO_URL: "https://your-project-4-demo.com",

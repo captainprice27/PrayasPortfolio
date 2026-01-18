@@ -6,19 +6,26 @@
  */
 
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiArrowDown } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiInstagram, FiArrowDown } from 'react-icons/fi';
+import { usePortfolio } from '../context/PortfolioContext';
 import './Hero.css';
 
-// =====================================================
-// CONFIGURATION - Replace these with your actual links
-// =====================================================
-const SOCIAL_LINKS = {
-  GITHUB_URL: "https://github.com/YOUR_GITHUB_USERNAME",
-  LINKEDIN_URL: "https://linkedin.com/in/YOUR_LINKEDIN_USERNAME",
-  EMAIL_ADDRESS: "your.email@example.com",
-};
-
 function Hero() {
+  const { data } = usePortfolio();
+
+  // Fallback data if API not yet loaded
+  const personal = data?.personal || {
+    FULL_NAME: "Prayas Mazumder",
+    PROFESSIONAL_TITLE: "Software Developer",
+    TAGLINE: "Building innovative solutions with modern technologies. B.Tech CST graduate passionate about clean code and great user experiences."
+  };
+
+  const contact = data?.contact || {
+    GITHUB_URL: "https://github.com/YOUR_GITHUB_USERNAME",
+    LINKEDIN_URL: "https://linkedin.com/in/YOUR_LINKEDIN_USERNAME",
+    INSTAGRAM_URL: "https://instagram.com/YOUR_USERNAME",
+  };
+
   // Scroll to about section
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
@@ -79,7 +86,7 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            Prayas Mazumder
+            {personal.FULL_NAME}
           </motion.h1>
 
           {/* Professional Title */}
@@ -89,7 +96,7 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <span className="title-highlight">Software Developer</span>
+            <span className="title-highlight">{personal.PROFESSIONAL_TITLE}</span>
           </motion.h2>
 
           {/* Tagline */}
@@ -99,9 +106,7 @@ function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            Building innovative solutions with modern technologies.
-            <br />
-            B.Tech CST graduate passionate about clean code and great user experiences.
+            {personal.TAGLINE}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -127,7 +132,7 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.9 }}
           >
             <a 
-              href={SOCIAL_LINKS.GITHUB_URL} 
+              href={contact.GITHUB_URL} 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-link"
@@ -136,7 +141,7 @@ function Hero() {
               <FiGithub />
             </a>
             <a 
-              href={SOCIAL_LINKS.LINKEDIN_URL} 
+              href={contact.LINKEDIN_URL} 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-link"
@@ -145,11 +150,13 @@ function Hero() {
               <FiLinkedin />
             </a>
             <a 
-              href={`mailto:${SOCIAL_LINKS.EMAIL_ADDRESS}`}
+              href={contact.INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="social-link"
-              aria-label="Email Me"
+              aria-label="Instagram Profile"
             >
-              <FiMail />
+              <FiInstagram />
             </a>
           </motion.div>
         </motion.div>
@@ -175,3 +182,4 @@ function Hero() {
 }
 
 export default Hero;
+

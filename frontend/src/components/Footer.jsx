@@ -7,29 +7,25 @@
 
 import { motion } from 'framer-motion';
 import { FiArrowUp, FiHeart, FiGithub, FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { usePortfolio } from '../context/PortfolioContext';
 import './Footer.css';
 
-// =====================================================
-// FOOTER CONFIGURATION
-// =====================================================
-const FOOTER_CONFIG = {
-  // REPLACE: Your name for copyright
-  NAME: "Prayas Mazumder",
-  
-  // Social Links - Same as in other components
-  SOCIAL_LINKS: [
-    { icon: FiGithub, URL: "https://github.com/YOUR_USERNAME", label: "GitHub" },
-    { icon: FiLinkedin, URL: "https://linkedin.com/in/YOUR_USERNAME", label: "LinkedIn" },
-    { icon: FiTwitter, URL: "https://twitter.com/YOUR_HANDLE", label: "Twitter" },
-  ],
-};
-
 function Footer() {
+  const { data } = usePortfolio();
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const currentYear = new Date().getFullYear();
+  const name = data?.personal?.FULL_NAME || "Prayas Mazumder";
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+
+  const socialLinks = [
+    { icon: FiGithub, URL: data?.contact?.GITHUB_URL || "https://github.com/", label: "GitHub" },
+    { icon: FiLinkedin, URL: data?.contact?.LINKEDIN_URL || "https://linkedin.com/in/", label: "LinkedIn" },
+    { icon: FiTwitter, URL: data?.contact?.TWITTER_URL || "https://twitter.com/", label: "Twitter" },
+  ];
 
   return (
     <footer className="footer">
@@ -37,13 +33,13 @@ function Footer() {
         <div className="footer-content">
           {/* Branding */}
           <div className="footer-brand">
-            <span className="footer-logo">PM</span>
-            <span className="footer-name">{FOOTER_CONFIG.NAME}</span>
+            <span className="footer-logo">{initials}</span>
+            <span className="footer-name">{name}</span>
           </div>
 
           {/* Social Links */}
           <div className="footer-socials">
-            {FOOTER_CONFIG.SOCIAL_LINKS.map((social) => (
+            {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.URL}
@@ -72,7 +68,7 @@ function Footer() {
         {/* Copyright */}
         <div className="footer-bottom">
           <p className="copyright">
-            © {currentYear} {FOOTER_CONFIG.NAME}. All rights reserved.
+            © {currentYear} {name}. All rights reserved.
           </p>
           <p className="made-with">
             Made with <FiHeart className="heart-icon" /> using React & Node.js

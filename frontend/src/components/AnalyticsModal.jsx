@@ -30,9 +30,9 @@ function AnalyticsModal({ isOpen, onClose }) {
           setData({
             totalVisits: 1245,
             lastVisitors: [
-              { ip: '192.168.1.1', location: 'Mumbai, India', time: new Date().toISOString(), platform: 'Windows 10 / Chrome' },
-              { ip: '10.0.0.5', location: 'Bangalore, India', time: new Date(Date.now() - 3600000).toISOString(), platform: 'MacOS / Safari' },
-              { ip: '172.16.0.1', location: 'Delhi, India', time: new Date(Date.now() - 7200000).toISOString(), platform: 'Android / Chrome' }
+              { ip: '192.168.1.1', location: 'Mumbai, India', timestamp: new Date().toISOString(), platform: 'Windows 10 / Chrome' },
+              { ip: '10.0.0.5', location: 'Bangalore, India', timestamp: new Date(Date.now() - 3600000).toISOString(), platform: 'MacOS / Safari' },
+              { ip: '172.16.0.1', location: 'Delhi, India', timestamp: new Date(Date.now() - 7200000).toISOString(), platform: 'Android / Chrome' }
             ]
           });
         })
@@ -96,7 +96,7 @@ function AnalyticsModal({ isOpen, onClose }) {
                       <tr><td colSpan="3" className="loading-cell">Loading data...</td></tr>
                     ) : (data.lastVisitors.map((visitor, index) => (
                       <tr key={index}>
-                        <td>{new Date(visitor.time).toLocaleTimeString('en-IN', {hour: '2-digit', minute:'2-digit'})}</td>
+                        <td>{visitor.timestamp ? new Date(visitor.timestamp).toLocaleTimeString('en-IN', {hour: '2-digit', minute:'2-digit'}) : 'N/A'}</td>
                         <td className="location-cell"><FiGlobe /> {visitor.location || 'Unknown'}</td>
                         <td><FiMonitor /> {visitor.platform || 'Unknown'}</td>
                       </tr>
