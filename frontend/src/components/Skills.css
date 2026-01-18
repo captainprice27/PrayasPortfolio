@@ -1,0 +1,95 @@
+/**
+ * =====================================================
+ * SKILLS SECTION STYLES
+ * =====================================================
+ */
+
+.skills {
+    background: var(--bg-primary);
+}
+
+.skills-grid {
+    display: grid;
+    /* Change to single column layout as requested ("below then below") */
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    max-width: 900px;
+    /* Constrain width for better readability */
+    margin: 0 auto;
+}
+
+/* Skill Category Card */
+.skill-category {
+    padding: var(--space-8);
+    /* Increased padding for wider look */
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: var(--radius-lg);
+    font-size: var(--text-xl);
+    flex-shrink: 0;
+}
+
+.category-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+}
+
+/* Bubbles Container */
+.category-skills-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+/* Skill Bubble Style */
+.skill-bubble {
+    padding: var(--space-2) var(--space-4);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    /* Pill shape */
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    cursor: default;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Hover effect */
+.skill-bubble:hover {
+    border-color: var(--accent-primary);
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .skill-category {
+        padding: var(--space-5);
+    }
+
+    .category-skills-bubbles {
+        gap: var(--space-2);
+    }
+}

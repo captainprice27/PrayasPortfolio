@@ -1,0 +1,53 @@
+/**
+ * =====================================================
+ * THEME TOGGLE STYLES
+ * =====================================================
+ */
+
+.theme-toggle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: border-color var(--transition-base);
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent-primary);
+}
+
+.toggle-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.toggle-icon {
+    font-size: 1.25rem;
+    transition: color var(--transition-base);
+}
+
+.toggle-icon.sun {
+    color: var(--accent-primary);
+}
+
+.toggle-icon.moon {
+    color: var(--accent-secondary);
+}
+
+.toggle-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-full);
+    z-index: 1;
+    pointer-events: none;
+}

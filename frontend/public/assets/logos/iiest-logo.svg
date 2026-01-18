@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <!-- PLACEHOLDER: Replace with IIEST Shibpur official logo -->
+  <!-- File: /public/assets/logos/iiest-logo.png -->
+  <rect width="200" height="200" fill="#1a365d" rx="20"/>
+  <text x="100" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fff">IIEST</text>
+  <text x="100" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#ffd700">Shibpur</text>
+  <text x="100" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ccc">Est. 1856</text>
+</svg>
