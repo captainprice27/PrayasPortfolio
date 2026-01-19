@@ -139,7 +139,7 @@ function JourneyTimeline() {
   });
 
   // Map backend journey data to frontend format
-  const milestones = (data?.journey || []).map((m, index) => ({
+  const mappedMilestones = (data?.journey || []).map((m, index) => ({
     ...m,
     YEAR_RANGE: m.YEAR_RANGE || `${m.YEAR_START}${m.YEAR_END ? ` - ${m.YEAR_END}` : ''}`,
     ACHIEVEMENT: m.ACHIEVEMENT || m.ACHIEVEMENT_DETAILS,
@@ -147,8 +147,8 @@ function JourneyTimeline() {
     color: m.type === 'work' ? 'var(--accent-primary)' : 'var(--accent-secondary)'
   }));
 
-  // Fallback if no data
-  const displayMilestones = milestones.length > 0 ? milestones : [
+  // Define comprehensive fallback data
+  const fallbackMilestones = [
     {
       id: 1,
       type: "education",
@@ -186,6 +186,9 @@ function JourneyTimeline() {
       color: "var(--accent-primary)",
     }
   ];
+
+  // If API data is missing or incomplete (less than 3 items), use the full fallback list
+  const displayMilestones = mappedMilestones.length >= 3 ? mappedMilestones : fallbackMilestones;
 
   return (
     <section id="journey" className="journey section">

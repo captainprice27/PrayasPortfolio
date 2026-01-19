@@ -128,8 +128,8 @@ function Projects() {
 
   const projects = data?.projects || [];
 
-  // Fallback if no projects loaded
-  const displayProjects = projects.length > 0 ? projects : [
+  // Define full fallback list for robustness
+  const fallbackProjects = [
     {
       id: 1,
       PROJECT_TITLE: "Ransom Check",
@@ -171,6 +171,9 @@ function Projects() {
       PROJECT_YEAR: "2023"
     }
   ];
+
+  // Use fallback if API returns less than 4 projects to ensure a full UI
+  const displayProjects = projects.length >= 4 ? projects : fallbackProjects;
 
   return (
     <section id="projects" className="projects section">

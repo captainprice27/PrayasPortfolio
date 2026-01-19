@@ -59,7 +59,9 @@ function CodingProfiles() {
     triggerOnce: true,
   });
 
-  const profiles = data?.codingProfiles || [
+  const apiProfiles = data?.codingProfiles || [];
+  
+  const fallbackProfiles = [
     {
       name: "LeetCode",
       logo: "/assets/logos/leetcode-logo.svg",
@@ -79,6 +81,8 @@ function CodingProfiles() {
       description: "Pupil (Max Rating: 1395). Active problem solver in Div 2 and Div 3 contests.",
     },
   ];
+
+  const profiles = apiProfiles.length >= 3 ? apiProfiles : fallbackProfiles;
 
   return (
     <section id="coding-profiles" className="coding-profiles section">
