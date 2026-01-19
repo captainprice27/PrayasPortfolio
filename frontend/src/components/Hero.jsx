@@ -17,7 +17,8 @@ function Hero() {
   const personal = data?.personal || {
     FULL_NAME: "Prayas Mazumder",
     PROFESSIONAL_TITLE: "Junior Software Developer",
-    TAGLINE: "Building innovative stuffs with modern technologies. Passionate about Sports and Tech."
+    TAGLINE: "Building innovative stuffs with modern technologies. Passionate about Sports and Tech.",
+    HERO_BG_IMAGE: "/assets/images/hero-bg-demo.png"
   };
 
   const contact = data?.contact || {

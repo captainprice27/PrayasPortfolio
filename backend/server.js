@@ -23,9 +23,29 @@ const app = express();
 // Enable CORS for frontend requests
 // IMPORTANT: Update origin in production to your actual frontend URL
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-        ? process.env.FRONTEND_URL
-        : ['http://localhost:5173', 'http://localhost:3000'],
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            'http://localhost:5173',
+            'http://localhost:3000'
+        ];
+
+        // Add production frontend URL variations to handle generic inputs
+        if (process.env.FRONTEND_URL) {
+            const frontend = process.env.FRONTEND_URL.replace(/\/$/, ''); // Remove trailing slash
+            allowedOrigins.push(frontend);
+            allowedOrigins.push(`https://${frontend.replace(/^https?:\/\//, '')}`); // Ensure https version exists
+        }
+
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1 || !process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+            callback(null, true);
+        } else {
+            console.log('Blocked by CORS:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
 }));
 

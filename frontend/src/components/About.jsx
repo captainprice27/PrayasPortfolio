@@ -22,6 +22,9 @@ function About() {
   // Data mapping with fallbacks
   const personal = data?.personal || {
     FULL_NAME: "Prayas Mazumder",
+    ABOUT_BG_IMAGE: "/assets/images/about-bg-demo.png",
+    PROFILE_IMAGE_PATH: "/assets/images/profile-photo.jpg",
+    RESUME_URL: "/assets/resume/PRAYAS_MAZUMDER_RESUME.pdf",
     ABOUT_DESCRIPTION: `I'm a passionate Software Developer with a strong foundation in Computer Science. 
     As a B.Tech graduate from IIEST, Shibpur, I've developed expertise in building 
     scalable applications using modern technologies. Currently working as an Analyst-Developer at WTW.`,
