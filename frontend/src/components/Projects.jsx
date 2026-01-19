@@ -132,13 +132,43 @@ function Projects() {
   const displayProjects = projects.length > 0 ? projects : [
     {
       id: 1,
-      PROJECT_TITLE: "Portfolio Project",
-      PROJECT_DESCRIPTION: "Full-stack personal portfolio with React, Node.js, and MongoDB.",
+      PROJECT_TITLE: "Ransom Check",
+      PROJECT_DESCRIPTION: "Developed an end-to-end security pipeline that identifies Android ransomware across 20+ families by transforming raw APK data into visual RGB feature maps for deep learning analysis. Using Python and TensorFlow, I engineered a Convolutional Neural Network (CNN) that achieved 86% accuracy.",
       PROJECT_IMAGE: "/assets/projects/project-1.png",
-      TECHNOLOGIES_USED: ["React", "Express", "MongoDB"],
+      TECHNOLOGIES_USED: ["Python", "TensorFlow", "Flask", "MongoDB", "JavaScript"],
+      GITHUB_REPO_URL: "https://github.com/captainprice27/Ransom-Check",
+      LIVE_DEMO_URL: "https://ransom-check.netlify.app/",
+      PROJECT_YEAR: "2025"
+    },
+    {
+      id: 2,
+      PROJECT_TITLE: "Project Two Title",
+      PROJECT_DESCRIPTION: "Description of your second project. What technologies did you use? What challenges did you overcome? What was the impact or result of this project?",
+      PROJECT_IMAGE: "/assets/projects/project-2.png",
+      TECHNOLOGIES_USED: ["Python", "Django", "PostgreSQL", "Docker"],
       GITHUB_REPO_URL: "#",
       LIVE_DEMO_URL: "#",
       PROJECT_YEAR: "2024"
+    },
+    {
+      id: 3,
+      PROJECT_TITLE: "Project Three Title",
+      PROJECT_DESCRIPTION: "Description of your third project. Highlight the unique aspects of this project and what you learned while building it.",
+      PROJECT_IMAGE: "/assets/projects/project-3.png",
+      TECHNOLOGIES_USED: ["Next.js", "TypeScript", "Tailwind", "Prisma"],
+      GITHUB_REPO_URL: "#",
+      LIVE_DEMO_URL: "#",
+      PROJECT_YEAR: "2023"
+    },
+    {
+      id: 4,
+      PROJECT_TITLE: "Project Four Title",
+      PROJECT_DESCRIPTION: "Description of your fourth project. This could be a personal project, hackathon submission, or academic project that showcases your skills.",
+      PROJECT_IMAGE: "/assets/projects/project-4.png",
+      TECHNOLOGIES_USED: ["React Native", "Firebase", "Redux"],
+      GITHUB_REPO_URL: "#",
+      LIVE_DEMO_URL: "#",
+      PROJECT_YEAR: "2023"
     }
   ];
 

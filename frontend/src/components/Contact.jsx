@@ -21,19 +21,19 @@ function Contact() {
   
   // Map backend contact data
   const contactInfo = {
-    EMAIL: data?.contact?.EMAIL_ADDRESS || "your.email@example.com",
-    ALT_EMAIL: data?.contact?.SECONDARY_EMAIL || "contact@example.com",
-    LOCATION: data?.contact?.LOCATION || "India",
+    EMAIL: data?.contact?.EMAIL_ADDRESS || "mazumder.prayas@gmail.com",
+    ALT_EMAIL: data?.contact?.SECONDARY_EMAIL || "prayasrikai@gmail.com",
+    LOCATION: data?.contact?.LOCATION || "Kolkata, India",
     SOCIAL_LINKS: [
       { 
         name: "GitHub", 
         icon: FiGithub, 
-        URL: data?.contact?.GITHUB_URL || "https://github.com/" 
+        URL: data?.contact?.GITHUB_URL || "https://github.com/captainprice27" 
       },
       { 
         name: "LinkedIn", 
         icon: FiLinkedin, 
-        URL: data?.contact?.LINKEDIN_URL || "https://linkedin.com/in/" 
+        URL: data?.contact?.LINKEDIN_URL || "https://linkedin.com/in/prayas-mazumder" 
       },
       { 
         name: "X (Twitter)", 
@@ -53,7 +53,7 @@ function Contact() {
             <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
           </svg>
         ), 
-        URL: data?.contact?.TWITTER_URL || "https://x.com/" 
+        URL: data?.contact?.TWITTER_URL || "https://x.com/captainprice_27" 
       },
     ],
   };
@@ -87,7 +87,8 @@ function Contact() {
     // - Your own backend API
     
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

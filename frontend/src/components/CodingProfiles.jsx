@@ -59,7 +59,26 @@ function CodingProfiles() {
     triggerOnce: true,
   });
 
-  const profiles = data?.codingProfiles || [];
+  const profiles = data?.codingProfiles || [
+    {
+      name: "LeetCode",
+      logo: "/assets/logos/leetcode-logo.svg",
+      profileLink: "https://leetcode.com/captainprice27/",
+      description: "Solved 1000+ problems. Max Rating: 2024. Active daily problem solver. Got prestigious 'Knight' badge",
+    },
+    {
+      name: "CodeChef",
+      logo: "/assets/logos/codechef-logo.svg",
+      profileLink: "https://www.codechef.com/users/captainprice27",
+      description: "3-Star Rated Coder. Highest Rating: 1789. Ranked in top 6000 globally.",
+    },
+    {
+      name: "Codeforces",
+      logo: "/assets/logos/codeforces-logo.svg",
+      profileLink: "https://codeforces.com/profile/icecream27",
+      description: "Pupil (Max Rating: 1395). Active problem solver in Div 2 and Div 3 contests.",
+    },
+  ];
 
   return (
     <section id="coding-profiles" className="coding-profiles section">

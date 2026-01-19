@@ -25,10 +25,7 @@ function About() {
     ABOUT_BG_IMAGE: "/assets/images/about-bg-demo.png",
     PROFILE_IMAGE_PATH: "/assets/images/profile-photo.jpg",
     RESUME_URL: "/assets/resume/PRAYAS_MAZUMDER_RESUME.pdf",
-    ABOUT_DESCRIPTION: `I'm a passionate Software Developer with a strong foundation in Computer Science. 
-    As a B.Tech graduate from IIEST, Shibpur, I've developed expertise in building 
-    scalable applications using modern technologies. Currently working as an Analyst-Developer at WTW.`,
-    PROFILE_IMAGE_PATH: "/assets/images/profile-photo.svg"
+    ABOUT_DESCRIPTION: `Passionate software developer with a B.Tech in Computer Science and Technology from IIEST, Shibpur. I specialize in building scalable web applications and enjoy solving complex problems using modern technologies.`,
   };
 
   const contact = data?.contact || {
