@@ -24,7 +24,7 @@ const app = express();
 // IMPORTANT: Update origin in production to your actual frontend URL
 app.use(cors({
     origin: process.env.NODE_ENV === 'production'
-        ? 'YOUR_PRODUCTION_FRONTEND_URL' // Replace with actual URL
+        ? process.env.FRONTEND_URL
         : ['http://localhost:5173', 'http://localhost:3000'],
     credentials: true,
 }));
