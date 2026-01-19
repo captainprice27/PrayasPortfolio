@@ -90,9 +90,36 @@ function Skills() {
     triggerOnce: true,
   });
 
-  // Group skills by category
-  const skills = data?.skills || [];
-  const groupedSkills = skills.reduce((acc, skill) => {
+  // Group skills by category with full fallback support
+  const apiSkills = data?.skills || [];
+  
+  const fallbackSkills = [
+    { name: "C#", category: "language" },
+    { name: "C++", category: "language" },
+    { name: "Python", category: "language" },
+    { name: "JavaScript", category: "language" },
+    { name: "TypeScript", category: "language" },
+    { name: "React.js", category: "frontend" },
+    { name: "Next.js", category: "frontend" },
+    { name: "HTML5", category: "frontend" },
+    { name: "Tailwind CSS", category: "frontend" },
+    { name: "Bootstrap", category: "frontend" },
+    { name: "Node.js", category: "backend" },
+    { name: "Express.js", category: "backend" },
+    { name: "ASP.NET Core", category: "backend" },
+    { name: "MySQL", category: "backend" },
+    { name: "SQL Server", category: "backend" },
+    { name: "MongoDB", category: "backend" },
+    { name: "Git & GitHub", category: "tools" },
+    { name: "Docker", category: "tools" },
+    { name: "Kubernetes", category: "tools" },
+    { name: "Azure", category: "tools" },
+    { name: "AWS", category: "tools" },
+  ];
+
+  const activeSkills = apiSkills.length >= 10 ? apiSkills : fallbackSkills;
+
+  const groupedSkills = activeSkills.reduce((acc, skill) => {
     const category = skill.category || 'tools';
     if (!acc[category]) acc[category] = [];
     acc[category].push(skill);
@@ -115,21 +142,17 @@ function Skills() {
           <h2 className="section-title">Technical Skills</h2>
           <p className="section-subtitle">My toolbox & technologies</p>
         </motion.div>
-
+ 
         {/* Skills Grid */}
         <div className="skills-grid">
-          {categories.length > 0 ? (
-            categories.map((category, index) => (
-              <SkillGroup 
-                key={category} 
-                category={category} 
-                skills={groupedSkills[category]} 
-                index={index}
-              />
-            ))
-          ) : (
-            <p className="loading-text">Loading skills...</p>
-          )}
+          {categories.map((category, index) => (
+            <SkillGroup 
+              key={category} 
+              category={category} 
+              skills={groupedSkills[category]} 
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </section>
