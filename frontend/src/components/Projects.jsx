@@ -134,7 +134,7 @@ function Projects() {
       id: 1,
       PROJECT_TITLE: "Portfolio Project",
       PROJECT_DESCRIPTION: "Full-stack personal portfolio with React, Node.js, and MongoDB.",
-      PROJECT_IMAGE: "/assets/projects/project-1.svg",
+      PROJECT_IMAGE: "/assets/projects/project-1.png",
       TECHNOLOGIES_USED: ["React", "Express", "MongoDB"],
       GITHUB_REPO_URL: "#",
       LIVE_DEMO_URL: "#",

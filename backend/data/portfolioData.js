@@ -161,14 +161,12 @@ const portfolioData = {
         {
             id: 1,
             PROJECT_TITLE: "Project One Title",
-            PROJECT_DESCRIPTION: `A comprehensive description of your first project. Explain what problem 
-      it solves, the key features, and your role in building it. This should be 2-3 sentences 
-      that give a good overview.`,
+            PROJECT_DESCRIPTION: `Developed an end-to-end security pipeline that identifies Android ransomware across 20+ families by transforming raw APK data into visual RGB feature maps for deep learning analysis. Using Python and TensorFlow, I engineered a Convolutional Neural Network (CNN) that achieved 86% accuracy and an 85.31 F1 score, optimized through a massive 90,000-combination hyperparameter search. The project is deployed as a full-stack Flask platform that supports batch APK uploads and provides real-time model inference with confidence score visualizations.`,
             PROJECT_IMAGE: "/assets/projects/project-1.png", // Replace with project screenshot
-            TECHNOLOGIES_USED: ["React", "Node.js", "MongoDB", "Express"],
-            GITHUB_REPO_URL: "https://github.com/YOUR_USERNAME/project-1",
-            LIVE_DEMO_URL: "https://your-project-1-demo.com",
-            PROJECT_YEAR: "2024",
+            TECHNOLOGIES_USED: ["Python", "TensorFlow", "Flask", "MongoDB", "JavaScript"],
+            GITHUB_REPO_URL: "https://github.com/captainprice27/Ransom-Check",
+            LIVE_DEMO_URL: "https://ransom-check.netlify.app/",
+            PROJECT_YEAR: "2025",
             isFeatured: true,
         },
         {
@@ -200,7 +198,7 @@ const portfolioData = {
             PROJECT_TITLE: "Project Four Title",
             PROJECT_DESCRIPTION: `Description of your fourth project. This could be a personal project, 
       hackathon submission, or academic project that showcases your skills.`,
-            PROJECT_IMAGE: "/assets/projects/project-4.svg",
+            PROJECT_IMAGE: "/assets/projects/project-4.png",
             TECHNOLOGIES_USED: ["React Native", "Firebase", "Redux"],
             GITHUB_REPO_URL: "https://github.com/YOUR_USERNAME/project-4",
             LIVE_DEMO_URL: "https://your-project-4-demo.com",
