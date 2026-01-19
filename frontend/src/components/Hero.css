@@ -12,6 +12,35 @@
     justify-content: center;
     overflow: hidden;
     padding-top: 80px;
+    background: var(--bg-primary);
+}
+
+.hero-bg-container {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    display: none;
+}
+
+[data-theme="dark"] .hero-bg-container {
+    display: block;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(var(--bg-secondary-rgb, 26, 26, 26), 0.2),
+            rgba(var(--bg-secondary-rgb, 26, 26, 26), 0.4));
+    z-index: 1;
+    display: none;
+}
+
+[data-theme="dark"] .hero-bg-overlay {
+    display: block;
 }
 
 /* Animated Background Elements */
@@ -71,7 +100,25 @@
 
 /* Hero Content */
 .hero-content {
-    max-width: 800px;
+    max-width: 950px;
+    padding: var(--space-20) var(--space-16);
+    width: 90%;
+    /* Default (Light Mode) - No Card Style */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+}
+
+[data-theme="dark"] .hero-content {
+    /* Dark Mode - Glassmorphism Card Style */
+    background: rgba(13, 13, 13, 0.35);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-4xl);
+    box-shadow: var(--shadow-lg);
 }
 
 .hero-greeting {

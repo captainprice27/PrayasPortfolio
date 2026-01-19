@@ -11,9 +11,9 @@ const portfolioData = {
     // =====================================================
     personal: {
         FULL_NAME: "Prayas Mazumder",
-        PROFESSIONAL_TITLE: "Software Developer",
+        PROFESSIONAL_TITLE: "Junior Software Developer",
         // TAGLINE: Short catchphrase that appears below your name
-        TAGLINE: "Building innovative solutions with modern technologies",
+        TAGLINE: "Building innovative stuffs with modern technologies. Passionate about Sports and Tech.",
 
         // ABOUT_DESCRIPTION: A paragraph about yourself (2-4 sentences)
         ABOUT_DESCRIPTION: `Passionate software developer with a B.Tech in Computer Science and Technology 
@@ -23,6 +23,9 @@ const portfolioData = {
 
         // PROFILE_IMAGE_PATH: Path to your profile photo (replace in frontend assets)
         PROFILE_IMAGE_PATH: "/assets/images/profile-photo.jpg",
+        ABOUT_BG_IMAGE: "/assets/images/about-bg-demo.png",
+        HERO_BG_IMAGE: "/assets/images/hero-bg-demo.png",
+        RESUME_URL: "/assets/resume/PRAYAS_MAZUMDER_RESUME.pdf",
     },
 
     // =====================================================
@@ -31,13 +34,13 @@ const portfolioData = {
     // =====================================================
     contact: {
         EMAIL_ADDRESS: "mazumder.prayas@gmail.com",
-        PHONE_NUMBER: "+91-XXXXXXXXXX",
+        SECONDARY_EMAIL: "prayasrikai@gmail.com", // Secondary contact
         LOCATION: "Kolkata,India",
 
         // Social Media Links - Replace # with actual URLs
         GITHUB_URL: "https://github.com/captainprice27",
         LINKEDIN_URL: "https://linkedin.com/in/prayas-mazumder",
-        TWITTER_URL: "https://twitter.com/captainprice_27",
+        TWITTER_URL: "https://x.com/captainprice_27", // Updated to X.com
         INSTAGRAM_URL: "https://instagram.com/captainprice_27",
         PORTFOLIO_URL: "#", // Your deployed portfolio URL
     },

@@ -22,7 +22,7 @@ function Contact() {
   // Map backend contact data
   const contactInfo = {
     EMAIL: data?.contact?.EMAIL_ADDRESS || "your.email@example.com",
-    PHONE: data?.contact?.PHONE_NUMBER || "+91-XXXXXXXXXX",
+    ALT_EMAIL: data?.contact?.SECONDARY_EMAIL || "contact@example.com",
     LOCATION: data?.contact?.LOCATION || "India",
     SOCIAL_LINKS: [
       { 
@@ -36,9 +36,24 @@ function Contact() {
         URL: data?.contact?.LINKEDIN_URL || "https://linkedin.com/in/" 
       },
       { 
-        name: "Twitter", 
-        icon: FiTwitter, 
-        URL: data?.contact?.TWITTER_URL || "https://twitter.com/" 
+        name: "X (Twitter)", 
+        icon: () => (
+          <svg
+            stroke="currentColor"
+            fill="none"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+            <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+          </svg>
+        ), 
+        URL: data?.contact?.TWITTER_URL || "https://x.com/" 
       },
     ],
   };
@@ -147,15 +162,15 @@ function Contact() {
                 </div>
               </div>
 
-              {contactInfo.PHONE && (
+              {contactInfo.ALT_EMAIL && (
                 <div className="contact-detail-item">
                   <div className="detail-icon">
-                    <FiPhone />
+                    <FiMail />
                   </div>
                   <div className="detail-content">
-                    <span className="detail-label">Phone</span>
-                    <a href={`tel:${contactInfo.PHONE}`} className="detail-value">
-                      {contactInfo.PHONE}
+                    <span className="detail-label">Secondary Email</span>
+                    <a href={`mailto:${contactInfo.ALT_EMAIL}`} className="detail-value">
+                      {contactInfo.ALT_EMAIL}
                     </a>
                   </div>
                 </div>

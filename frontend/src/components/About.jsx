@@ -59,9 +59,13 @@ function About() {
     { 
       icon: FiBook, 
       label: "Education", 
-      value: data?.journey?.find(j => j.type === 'education')?.INSTITUTION_NAME 
-        ? `${data.journey.find(j => j.type === 'education').title}, ${data.journey.find(j => j.type === 'education').INSTITUTION_NAME}` 
-        : "B.Tech CST, IIEST Shibpur" 
+      value: (() => {
+        const edu = data?.journey?.filter(j => j.type === 'education');
+        const latest = edu && edu.length > 0 ? edu[edu.length - 1] : null;
+        return latest 
+          ? `${latest.title}, ${latest.INSTITUTION_NAME}` 
+          : "B.Tech CST, IIEST Shibpur";
+      })()
     },
   ];
 
@@ -86,6 +90,16 @@ function About() {
 
   return (
     <section id="about" className="about section">
+      {/* Background Image Container */}
+      <div 
+        className="about-bg-container"
+        style={{
+          backgroundImage: personal.ABOUT_BG_IMAGE ? `url(${personal.ABOUT_BG_IMAGE})` : 'none'
+        }}
+      >
+        <div className="about-bg-overlay"></div>
+      </div>
+
       <div className="container">
         <motion.div
           ref={ref}
@@ -155,12 +169,9 @@ function About() {
 
               {/* CTA */}
               <div className="about-cta">
-                <a href="#contact" className="btn btn-primary">
-                  Let's Connect
-                </a>
                 <a 
-                  href="/assets/resume/PRAYAS_MAZUMDER_RESUME.pdf" 
-                  className="btn btn-secondary"
+                  href={personal.RESUME_URL} 
+                  className="btn btn-primary"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

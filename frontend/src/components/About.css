@@ -5,7 +5,71 @@
  */
 
 .about {
+    position: relative;
     background: var(--bg-secondary);
+    overflow: hidden;
+    padding: var(--space-20) 0;
+}
+
+.about-bg-container {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    display: none;
+}
+
+[data-theme="dark"] .about-bg-container {
+    display: block;
+}
+
+.about-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(var(--bg-secondary-rgb, 26, 26, 26), 0.2),
+            rgba(var(--bg-secondary-rgb, 26, 26, 26), 0.4));
+    z-index: 1;
+    display: none;
+}
+
+[data-theme="dark"] .about-bg-overlay {
+    display: block;
+}
+
+/* Ensure container is above background */
+.about .container {
+    position: relative;
+    z-index: 2;
+}
+
+.about-content {
+    /* Default (Light Mode) - No Card Style */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    /* Removing padding might affect layout, but checking previous state... previous about content didn't have padding wrapper */
+    /* Wait, I added the wrapper. If I remove padding, content might hit edges if not for the container? */
+    /* The .container (bootstrap/tailwind style) usually handles width. I added .about-content inside .container */
+    /* Let's keep a small padding or 0? If I remove border/bg, padding is just whitespace. */
+    /* I'll reset padding to 0 or minimal if it was not there. */
+    padding: var(--space-4);
+    /* Minimal padding for safety */
+}
+
+[data-theme="dark"] .about-content {
+    background: rgba(13, 13, 13, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-12);
+    box-shadow: var(--shadow-lg);
 }
 
 .about-header {

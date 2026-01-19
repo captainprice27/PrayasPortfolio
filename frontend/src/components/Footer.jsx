@@ -24,7 +24,26 @@ function Footer() {
   const socialLinks = [
     { icon: FiGithub, URL: data?.contact?.GITHUB_URL || "https://github.com/", label: "GitHub" },
     { icon: FiLinkedin, URL: data?.contact?.LINKEDIN_URL || "https://linkedin.com/in/", label: "LinkedIn" },
-    { icon: FiTwitter, URL: data?.contact?.TWITTER_URL || "https://twitter.com/", label: "Twitter" },
+    { 
+      icon: () => (
+        <svg
+          stroke="currentColor"
+          fill="none"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+          <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+        </svg>
+      ), 
+      URL: data?.contact?.TWITTER_URL || "https://x.com/", 
+      label: "X (Twitter)" 
+    },
   ];
 
   return (
