@@ -16,14 +16,14 @@ function Hero() {
   // Fallback data if API not yet loaded
   const personal = data?.personal || {
     FULL_NAME: "Prayas Mazumder",
-    PROFESSIONAL_TITLE: "Software Developer",
+    PROFESSIONAL_TITLE: "B.tech(CST) grad and a Software Developer",
     TAGLINE: "Building innovative solutions with modern technologies. B.Tech CST graduate passionate about clean code and great user experiences."
   };
 
   const contact = data?.contact || {
-    GITHUB_URL: "https://github.com/YOUR_GITHUB_USERNAME",
-    LINKEDIN_URL: "https://linkedin.com/in/YOUR_LINKEDIN_USERNAME",
-    INSTAGRAM_URL: "https://instagram.com/YOUR_USERNAME",
+    GITHUB_URL: "https://github.com/captainprice27",
+    LINKEDIN_URL: "https://linkedin.com/in/prayas-mazumder",
+    INSTAGRAM_URL: "https://instagram.com/captainprice_27",
   };
 
   // Scroll to about section
@@ -33,6 +33,16 @@ function Hero() {
 
   return (
     <section id="home" className="hero">
+      {/* Background Image Container */}
+      <div 
+        className="hero-bg-container"
+        style={{
+          backgroundImage: personal.HERO_BG_IMAGE ? `url(${personal.HERO_BG_IMAGE})` : 'none'
+        }}
+      >
+        <div className="hero-bg-overlay"></div>
+      </div>
+
       {/* Animated Background Elements */}
       <div className="hero-bg-elements">
         <motion.div 
@@ -76,7 +86,7 @@ function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            Hello, I'm
+            Hi I'm
           </motion.span>
 
           {/* Name - IMPORTANT: This displays your name */}

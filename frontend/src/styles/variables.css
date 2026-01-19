@@ -14,39 +14,41 @@
      ================================================ */
   --bg-primary: #FFFFFF;
   --bg-secondary: #F8F9FA;
+  --bg-secondary-rgb: 248, 249, 250;
   --bg-tertiary: #F0F2F5;
-  
-  /* Light Red Accent - Soft coral/rose tones */
+
+  --card-bg: #FFFFFF;
+  --card-bg-rgb: 255, 255, 255;
   --accent-primary: #FF6B6B;
   --accent-primary-light: #FFE5E5;
   --accent-primary-hover: #FF5252;
-  
+
   /* Light Green Accent - Fresh mint tones */
   --accent-secondary: #4ECDC4;
   --accent-secondary-light: #E5FFF9;
   --accent-secondary-hover: #3DB9B0;
-  
+
   /* Gradient for highlights */
   --gradient-primary: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
   --gradient-subtle: linear-gradient(135deg, #FFE5E5 0%, #E5FFF9 100%);
-  
+
   /* Text Colors */
   --text-primary: #1A1A2E;
   --text-secondary: #4A4A68;
   --text-tertiary: #8A8AA3;
   --text-inverse: #FFFFFF;
-  
+
   /* Border & Shadow */
   --border-color: #E8E8EF;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
   --shadow-glow: 0 0 40px rgba(255, 107, 107, 0.15);
-  
+
   /* Card styling */
   --card-bg: #FFFFFF;
   --card-border: 1px solid var(--border-color);
-  
+
   /* Timeline specific */
   --timeline-line: linear-gradient(180deg, #FF6B6B 0%, #4ECDC4 100%);
   --timeline-node: #FF6B6B;
@@ -60,39 +62,43 @@
 [data-theme="dark"] {
   --bg-primary: #0D0D0D;
   --bg-secondary: #1A1A1A;
+  --bg-secondary-rgb: 26, 26, 26;
   --bg-tertiary: #252525;
-  
+
+  --card-bg: #1A1A1A;
+  --card-bg-rgb: 26, 26, 26;
+
   /* Blue Accent - Calm, professional blue */
   --accent-primary: #4A90D9;
   --accent-primary-light: #1E3A5F;
   --accent-primary-hover: #5BA0E9;
-  
+
   /* Yellow Accent - Warm, subtle gold */
   --accent-secondary: #F5D76E;
   --accent-secondary-light: #3D3520;
   --accent-secondary-hover: #FFE57F;
-  
+
   /* Gradient for highlights */
   --gradient-primary: linear-gradient(135deg, #4A90D9 0%, #F5D76E 100%);
   --gradient-subtle: linear-gradient(135deg, #1E3A5F 0%, #3D3520 100%);
-  
+
   /* Text Colors */
   --text-primary: #F5F5F5;
   --text-secondary: #B8B8C0;
   --text-tertiary: #7A7A88;
   --text-inverse: #0D0D0D;
-  
+
   /* Border & Shadow */
   --border-color: #2D2D2D;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 40px rgba(74, 144, 217, 0.2);
-  
+
   /* Card styling */
   --card-bg: #1A1A1A;
   --card-border: 1px solid var(--border-color);
-  
+
   /* Timeline specific */
   --timeline-line: linear-gradient(180deg, #4A90D9 0%, #F5D76E 100%);
   --timeline-node: #4A90D9;
@@ -105,7 +111,7 @@
 :root {
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: 'Outfit', var(--font-primary);
-  
+
   /* Font Sizes */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -118,7 +124,7 @@
   --text-5xl: 3rem;
   --text-6xl: 3.75rem;
   --text-7xl: 4.5rem;
-  
+
   /* Font Weights */
   --font-light: 300;
   --font-normal: 400;
@@ -126,7 +132,7 @@
   --font-semibold: 600;
   --font-bold: 700;
   --font-extrabold: 800;
-  
+
   /* Line Heights */
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -146,22 +152,25 @@
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
+  --space-14: 3.5rem;
   --space-16: 4rem;
   --space-20: 5rem;
   --space-24: 6rem;
-  
+
   /* Container */
   --container-max: 1200px;
   --container-padding: var(--space-6);
-  
+
   /* Border Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
+  --radius-3xl: 2.5rem;
+  --radius-4xl: 3.5rem;
   --radius-full: 9999px;
-  
+
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
@@ -177,6 +186,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -184,9 +194,12 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px var(--timeline-node-glow);
   }
+
   50% {
     box-shadow: 0 0 40px var(--timeline-node-glow);
   }
@@ -196,18 +209,23 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
