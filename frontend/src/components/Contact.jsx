@@ -14,6 +14,7 @@ import {
   FiCheckCircle, FiAlertCircle
 } from 'react-icons/fi';
 import { usePortfolio } from '../context/PortfolioContext';
+import axios from 'axios';
 import './Contact.css';
 
 function Contact() {
@@ -87,30 +88,23 @@ function Contact() {
     // - Your own backend API
     
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // Use axios instead of fetch for consistency and to use global config
+      const response = await axios.post('/api/contact', formData);
 
-      const data = await response.json();
-
-      if (data.success) {
+      if (response.data.success) {
         setStatus({
           type: 'success',
-          message: data.message || 'Message sent successfully! I\'ll get back to you soon.',
+          message: response.data.message || 'Message sent successfully! I\'ll get back to you soon.',
         });
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        throw new Error(data.error || 'Failed to send message');
+        throw new Error(response.data.error || 'Failed to send message');
       }
     } catch (error) {
+      console.error('Submission Error:', error);
       setStatus({
         type: 'error',
-        message: error.message || 'Something went wrong. Please try again or email me directly.',
+        message: error.response?.data?.error || error.message || 'Something went wrong. Please try again or email me directly.',
       });
     }
     
