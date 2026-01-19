@@ -113,12 +113,11 @@ app.use((err, req, res, next) => {
 
 // =====================================================
 // START SERVER
-// =====================================================
-
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`
 ╔═══════════════════════════════════════════════════╗
 ║     🎨 Portfolio Backend Server Started! 🎨       ║
 ╠═══════════════════════════════════════════════════╣
@@ -126,7 +125,8 @@ app.listen(PORT, () => {
 ║  Port:     ${PORT}
 ║  API:      http://localhost:${PORT}/api/portfolio
 ╚═══════════════════════════════════════════════════╝
-  `);
-});
+      `);
+    });
+}
 
 module.exports = app;
