@@ -16,8 +16,8 @@ function Hero() {
   // Fallback data if API not yet loaded
   const personal = data?.personal || {
     FULL_NAME: "Prayas Mazumder",
-    PROFESSIONAL_TITLE: "B.tech(CST) grad and a Software Developer",
-    TAGLINE: "Building innovative solutions with modern technologies. B.Tech CST graduate passionate about clean code and great user experiences."
+    PROFESSIONAL_TITLE: "Junior Software Developer",
+    TAGLINE: "Building innovative stuffs with modern technologies. Passionate about Sports and Tech."
   };
 
   const contact = data?.contact || {
